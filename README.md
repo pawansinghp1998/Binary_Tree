@@ -90,3 +90,31 @@ class Solution {
           return  (hasPathSum(root.left,(targetSum-root.val))  ||  hasPathSum(root.right,(targetSum-root.val)));  //Choosing eiter direction
     }
 }
+
+M2
+
+class Solution {
+
+boolean result = false;
+
+public boolean hasPathSum(TreeNode root, int targetSum) {
+    if(root == null) 
+    return false;
+    helper(root,targetSum,0);
+   
+    return result;
+}
+
+public void helper(TreeNode node,int targetSum,int currentSum){
+    if(node == null)
+       return ;
+    currentSum += node.val;
+    if(currentSum == targetSum && node.left == null && node.right == null)
+    {
+        result = true;
+        return ;
+    }
+    helper(node.left,targetSum,currentSum);
+    helper(node.right,targetSum,currentSum);
+}
+}
