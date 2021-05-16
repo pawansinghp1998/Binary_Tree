@@ -180,3 +180,69 @@ class Solution {
        
     }
 }
+
+Q.4.(101).Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+
+Input: root = [1,2,2,null,3,null,3]
+Output: false
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        boolean z=true;
+        leftside(root.left);                               //Calling the left portion of tree
+        rightside(root.right);                             //Calling right portion of tree
+        if(arr1.size()!=arr2.size())
+            return false;
+        for(int i=0;i<arr1.size();i++)
+            if(arr1.get(i)!=arr2.get(i))
+            {                                             //Comparing both the arraylist for checking symmetricity 
+                z=false;
+                break;
+            }
+        return z;
+    }
+        ArrayList<Integer> arr1=new ArrayList<Integer>();
+        ArrayList<Integer> arr2=new ArrayList<Integer>();
+        
+        void leftside(TreeNode root)
+        {
+            if(root==null)
+            {
+                arr1.add(0);
+                return;
+            }                                                   //Storing the left side of tree in an arraylist(from left to right)
+            arr1.add(root.val);
+            leftside(root.left);
+            leftside(root.right);
+        }
+        void rightside(TreeNode root)
+        {
+            if(root==null)
+            {
+                arr2.add(0);
+                return;                                         //Storing the right side of tree in an arraylist(from right to lefty)
+            }
+            arr2.add(root.val);
+            rightside(root.right);
+            rightside(root.left);
+        }
+    }
+
