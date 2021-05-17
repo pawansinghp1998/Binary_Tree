@@ -351,3 +351,68 @@ class Solution {
         return out;
     }
 }
+
+Q.7.(107).Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. (i.e., from left to right, level by level from leaf to root).
+
+Input: root = [3,9,20,null,null,15,7]
+Output: [[15,7],[9,20],[3]]
+
+Input: root = [1]
+Output: [[1]]
+
+Input: root = []
+Output: []
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        
+        List<List<Integer>> out=new ArrayList<List<Integer>>();
+         List<List<Integer>> out1=new ArrayList<List<Integer>>();
+        Stack<List> stack=new Stack<List>();
+        if (root==null)
+            return out;
+        Queue<TreeNode> queue=new LinkedList<TreeNode>();
+        TreeNode temp=root;
+        queue.add(temp);
+      
+        while(!queue.isEmpty())
+        {
+            List<Integer> list=new ArrayList<Integer>();
+            List<TreeNode> list1=new ArrayList<TreeNode>();
+                while(!queue.isEmpty())
+            {                                                  
+            TreeNode d=queue.poll();
+                    list1.add(d);
+            list.add(d.val);
+            }
+            for(TreeNode t:list1)                             
+            {
+            if(t.left!=null)
+                queue.add(t.left);
+            if(t.right!=null)
+                queue.add(t.right);
+            }
+            out.add(list);                                  
+        }
+      for(List t:out)                                        //reversing the list using stack
+          stack.push(t);
+        while(!stack.isEmpty())
+            out1.add(stack.pop());
+        return out1;
+    }
+}
