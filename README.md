@@ -292,3 +292,62 @@ class Solution {
         
     }
 }
+
+Q.6.(102).Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+Input: root = [3,9,20,null,null,15,7]
+Output: [[3],[9,20],[15,7]]
+
+Input: root = [1]
+Output: [[1]]
+
+Input: root = []
+Output: []
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> out=new ArrayList<List<Integer>>();
+        if (root==null)
+            return out;
+        Queue<TreeNode> queue=new LinkedList<TreeNode>();
+        TreeNode temp=root;
+        queue.add(temp);
+      
+        while(!queue.isEmpty())
+        {
+            List<Integer> list=new ArrayList<Integer>();
+            List<TreeNode> list1=new ArrayList<TreeNode>();
+                while(!queue.isEmpty())
+            {                                                   //Polling all the nodes of a level
+            TreeNode d=queue.poll();
+                    list1.add(d);
+            list.add(d.val);
+            }
+            for(TreeNode t:list1)                               //Adding all the children of the polled out nodes of above level
+            {
+            if(t.left!=null)
+                queue.add(t.left);
+            if(t.right!=null)
+                queue.add(t.right);
+            }
+            out.add(list);                                     //Adding list that contain node value level wise
+        }
+      
+        return out;
+    }
+}
