@@ -416,3 +416,45 @@ class Solution {
         return out1;
     }
 }
+
+Q.8.(226).Given the root of a binary tree, invert the tree, and return its root.
+
+Input: root = [4,2,7,1,3,6,9]
+Output: [4,7,2,9,6,3,1]
+
+Input: root = [2,1,3]
+Output: [2,3,1]
+
+Input: root = []
+Output: []
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root==null )
+            return root;
+        TreeNode temp1=root.left;
+        TreeNode temp2=root.right;
+       
+        root.left=temp2;                         //Swapping the left and right node of each node begining from root
+        root.right=temp1;
+        invertTree(root.left);
+            invertTree(root.right);
+        return root;
+        
+    }
+}
