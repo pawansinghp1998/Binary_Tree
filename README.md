@@ -487,3 +487,50 @@ class Solution {
             return false;                                                   //if both have different node value then return false
 }
 }
+
+Q.10.(113).Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where each path's sum equals targetSum.
+
+A leaf is a node with no children.
+Input: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+Output: [[5,4,11,2],[5,8,4,5]]
+
+Input: root = [1,2,3], targetSum = 5
+Output: []
+
+Input: root = [1,2], targetSum = 0
+Output: []
+
+class Solution {
+     List<List<Integer>> result = new ArrayList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+       
+        helperPathSum(root, targetSum, new ArrayList<Integer>());
+        return result;
+    }
+    
+    private void helperPathSum(TreeNode root, int targetSum, List<Integer> temp) {
+        
+        if (root == null)                                               //base case
+            return;
+        
+        if (root.left == null && root.right == null) {                  //if it is leaf node
+            
+    
+            if(targetSum - root.val == 0) {                           //If path sum is equal to target value
+    
+                temp.add(root.val);
+                result.add(new ArrayList<Integer>(temp));                  //adding list into result
+
+                temp.remove(temp.size() - 1);                               //removing last added element
+            }
+            return;                                                    //if it is leaf node but not path,in this case last element is not added so no need of removing
+        }
+        
+        temp.add(root.val);
+        helperPathSum(root.left, targetSum - root.val, temp);
+        helperPathSum(root.right, targetSum - root.val, temp);
+        temp.remove(temp.size() - 1);                                // removing element
+        
+    }
+     }
+
