@@ -458,3 +458,32 @@ class Solution {
         
     }
 }
+
+Q.9.Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+Input: p = [1,2,3], q = [1,2,3]
+Output: true
+
+Input: p = [1,2], q = [1,null,2]
+Output: false
+
+Input: p = [1,2,1], q = [1,1,2]
+Output: false
+
+class Solution {
+    
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+  if(p==null && q==null)                                                   //if both root are null
+      return true;
+        else if(p==null || q==null)                                        //if one node is null but other is not
+      return false;
+       else if(p.val==q.val)                                               //if node value are equal then check for left and right node recursively
+        {
+            return (isSameTree(p.left , q.left) && isSameTree(p.right , q.right));
+        }
+        else
+            return false;                                                   //if both have different node value then return false
+}
+}
