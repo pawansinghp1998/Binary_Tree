@@ -624,3 +624,50 @@ Output: 0
         helper(root.right);
     }
 }
+                                         
+Q.14.(116).You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:
+      Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+Initially, all next pointers are set to NULL.
+Input: root = [1,2,3,4,5,6,7]
+Output: [1,#,2,3,#,4,5,6,7,#]
+Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
+                                         
+   class Solution {
+    public Node connect(Node root) {
+        
+        if(root==null)
+        {
+            return root;
+        }
+        Queue<Node> q = new LinkedList<Node>();
+        q.add(root);
+        Node prev = null;
+        while(q.size()>0)
+        {
+            int count = q.size();
+            for(int i=0;i<count;i++)
+            {
+                Node curr = q.remove();
+                if(i==count-1)
+                {
+                    curr.next=null;
+                }
+                else
+                {
+                    curr.next = q.peek();
+                }
+                if(curr.left!=null)
+                {
+                    q.add(curr.left);
+                }
+                if(curr.right!=null)
+                {
+                    q.add(curr.right);
+                }
+            }
+        }
+        return root;
+    
+        
+    }
+}
