@@ -721,3 +721,48 @@ class Solution {
             return cmax;
         }
 }
+   
+   Q.16.(257).Given the root of a binary tree, return all root-to-leaf paths in any order.A leaf is a node with no children.
+   Input: root = [1,2,3,null,5]
+   Output: ["1->2->5","1->3"]
+   
+   Input: root = [1]
+   Output: ["1"]
+   class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> result=new ArrayList<String>();
+       helper(root,new ArrayList<>(),result);
+     return result;
+    }
+        public void helper(TreeNode root, List<TreeNode> path,List<String> result)
+        {
+           if(root==null)
+               return;
+            path.add(root);
+            if(root.left==null && root.right==null)        //if it is leaf node
+            {
+                result.add(helper1(path));                 //converting whole path into list format
+                 }
+            else
+            {
+            helper(root.left,path,result);                //traversing through the complete tree
+            helper(root.right,path,result);
+            }
+            path.remove(path.size()-1);                  //removing the node if the pointer is going back
+        }
+    String helper1(List<TreeNode> list1)
+    {
+        String delim = "->";
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while (i < list1.size() - 1)
+        {
+            sb.append((list1.get(i)).val);
+            sb.append(delim);
+            i++;
+        }
+        sb.append((list1.get(i)).val);
+      String res = sb.toString();
+        return res;
+    }
+}
