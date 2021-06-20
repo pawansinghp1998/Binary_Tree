@@ -766,3 +766,29 @@ class Solution {
         return res;
     }
 }
+                               
+ Q.17.(230).Given the root of a binary search tree, and an integer k, return the kth (1-indexed) smallest element in the tree.
+   Input: root = [3,1,4,null,2], k = 1
+   Output: 1
+                               
+  Input: root = [5,3,6,2,4,null,null,1], k = 3
+  Output: 3
+                               
+  class Solution {
+   
+ArrayList<Integer> arr=new ArrayList<>();
+    public int kthSmallest(TreeNode root, int k) {
+         helper(root);
+             return arr.get(k-1);      //return kthsmallest element fromm arraylist
+         }
+   public void helper(TreeNode root)
+    {
+        if(root==null)
+            return ;
+        helper(root.left);
+        arr.add(root.val);    //inorder traversal and storing element of tree in ascending order
+        helper(root.right);
+     
+        }
+    }
+
